@@ -1,0 +1,98 @@
+{
+  "$schema": "https://docs.openclaw.ai/openclaw.schema.json",
+  "gateway": {
+    "mode": "local",
+    "port": 18791,
+    "bind": "loopback",
+    "auth": {
+      "mode": "token",
+      "token": {
+        "source": "env",
+        "provider": "default",
+        "id": "OPENCLAW_GATEWAY_TOKEN"
+      }
+    },
+    "reload": {
+      "mode": "hybrid",
+      "debounce": 300
+    }
+  },
+  "agents": {
+    "defaults": {
+      "heartbeat": { "every": "55m" },
+      "maxConcurrent": 4,
+      "maxSubAgents": 3,
+      "subAgentTimeout": 600
+    },
+    "list": [
+      {
+        "id": "strategist",
+        "default": true,
+        "workspace": "~/openclaw-workspaces/doubling/strategist",
+        "model": {
+          "primary": "anthropic/claude-sonnet-4-6",
+          "thinking": { "budget": "medium" }
+        },
+        "cache": { "mode": "long" },
+        "tools": {
+          "allow": ["read", "write", "edit", "exec", "session_status"],
+          "deny": ["browser", "canvas", "nodes", "cron"]
+        }
+      },
+      {
+        "id": "scout",
+        "workspace": "~/openclaw-workspaces/doubling/scout",
+        "model": {
+          "primary": "anthropic/claude-sonnet-4-6",
+          "thinking": { "budget": "medium" }
+        },
+        "cache": { "mode": "long" },
+        "tools": {
+          "allow": ["read", "write", "web_search", "web_fetch", "exec", "session_status"],
+          "deny": ["edit", "browser", "canvas", "nodes", "cron"]
+        }
+      },
+      {
+        "id": "analyst",
+        "workspace": "~/openclaw-workspaces/doubling/analyst",
+        "model": {
+          "primary": "openai/gpt-5.4",
+          "thinking": { "budget": "medium" }
+        },
+        "tools": {
+          "allow": ["read", "web_fetch", "session_status"],
+          "deny": ["write", "edit", "exec", "browser", "canvas", "nodes", "cron"]
+        }
+      },
+      {
+        "id": "chronicle",
+        "workspace": "~/openclaw-workspaces/doubling/chronicle",
+        "model": {
+          "primary": "openai/gpt-5.4-mini",
+          "thinking": { "budget": "low" }
+        },
+        "cache": { "mode": "long" },
+        "tools": {
+          "allow": ["read", "write", "session_status"],
+          "deny": ["edit", "exec", "browser", "canvas", "nodes", "cron"]
+        }
+      }
+    ]
+  },
+  "sessions": {
+    "reset": {
+      "schedule": "4:00",
+      "idleTimeout": "120m"
+    },
+    "pruning": {
+      "mode": "cache-ttl",
+      "ttl": "1h"
+    }
+  },
+  "groups": {
+    "mode": "allowlist"
+  },
+  "dm": {
+    "scope": "per-channel-peer"
+  }
+}
