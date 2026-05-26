@@ -24,15 +24,15 @@ openclaw chat strategist
 |-------|------|-------|
 | **Strategist** | Directs the challenge. Picks the #1 play. Writes execution plans. | claude-sonnet-4-6 |
 | **Scout** | Searches the web for 5 ways to double today's balance | claude-sonnet-4-6 |
-| **Analyst** | Scores each opportunity. Read-only risk gate. | gpt-5.4 |
-| **Chronicle** | Generates TikTok scripts + X posts for each flip | gpt-5.4-mini |
+| **Analyst** | Scores each opportunity. Read-only risk gate. | gpt-4o |
+| **Chronicle** | Generates TikTok scripts + X posts for each flip | gpt-4o-mini |
 
 ---
 
 ## The Math
 
 | Flip | Balance | Play Zone |
-|------|---------|-----------|
+|------|---------|----------|
 | 0 | $10 | Start |
 | 1 | $20 | Micro flips |
 | 2 | $40 | Digital arbitrage |
@@ -75,6 +75,16 @@ kit/
     BRAND.md                   # Positioning + tone guide
     EXPERIMENT-CATEGORIES.md   # 10 priority experiment types
 ```
+
+---
+
+## The Flip #1 Product
+
+Flip #1 of the Doubling Project is a digital product: **50 AI Prompts for Solo Founders** — the exact prompts used to run a one-person business with an AI agent stack.
+
+**[$7 — get it on Gumroad](https://dropshipper117.gumroad.com/l/ai-prompts-founders)**
+
+5 categories: Business Strategy · Marketing Copy · Content Creation · Product Development · Operations
 
 ---
 
